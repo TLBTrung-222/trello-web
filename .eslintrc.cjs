@@ -16,10 +16,12 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'warn',
         'react/prop-types': 0,
         'react/display-name': 0,
+        'react/react-in-jsx-scope': 0,
+        '@typescript-eslint/no-unused-vars': 'warn',
 
         'no-console': 1,
         'no-lonely-if': 1,
-        'no-unused-vars': 1,
+        // 'no-unused-vars': 1, typescript-eslint already have this rule
         'no-trailing-spaces': 1,
         'no-multi-spaces': 1,
         'no-multiple-empty-lines': 1,
