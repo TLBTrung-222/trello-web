@@ -1,17 +1,16 @@
-import ModeSelect from '../ModeSelect'
 import Box from '@mui/material/Box'
 
-export default function AppBar() {
+export default function BoardContent() {
     return (
         <Box
             sx={{
-                height: (theme) => theme.trello.appBarHeight,
+                height: (theme) => `calc(100vh - ${theme.trello.boardBarHeight} - ${theme.trello.appBarHeight})`,
                 backgroundColor: 'primary.light',
                 display: 'flex',
                 alignItems: 'center'
             }}
         >
-            <ModeSelect />
+            Content
         </Box>
     )
 }
