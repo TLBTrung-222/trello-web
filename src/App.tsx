@@ -1,16 +1,13 @@
-import Button from '@mui/material/Button'
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
-import ThreeDRotation from '@mui/icons-material/ThreeDRotation'
-import Typography from '@mui/material/Typography'
 import { useColorScheme } from '@mui/material/styles'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { useMediaQuery } from '@mui/material'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 
 type Mode = 'light' | 'dark' | 'system'
 
@@ -34,59 +31,61 @@ function ModeSelect() {
                 onChange={handleChange}
             >
                 <MenuItem value="light">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <LightModeIcon fontSize="small" /> Light
                     </div>
                 </MenuItem>
                 <MenuItem value="dark">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <DarkModeIcon />
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <DarkModeIcon fontSize="small" />
                         Dark
-                    </div>
+                    </Box>
                 </MenuItem>
                 <MenuItem value="system">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <SettingsBrightnessIcon />
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <SettingsBrightnessIcon fontSize="small" />
                         System
-                    </div>
+                    </Box>
                 </MenuItem>
             </Select>
         </FormControl>
     )
 }
 
-function ModeToggle() {
-    const { mode, setMode } = useColorScheme()
-    const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-    console.log('preferDarkMode: ' + preferDarkMode)
-    return (
-        <Button
-            onClick={() => {
-                setMode(mode === 'light' ? 'dark' : 'light')
-            }}
-        >
-            {mode === 'light' ? 'Turn dark' : 'Turn light'}
-        </Button>
-    )
-}
-
 function App() {
     return (
-        <>
-            <ModeSelect />
-            <hr />
-            <ModeToggle />
-            <hr />
-            <AccessAlarmIcon />
-            <ThreeDRotation />
-            <div>Trung dep zai</div>
-            <Typography variant="body2" color="text.secondary">
-                Test typography
-            </Typography>
-            <Button variant="text">Text</Button>
-            <Button variant="contained">Contained</Button>
-            <Button variant="outlined">Outlined</Button>
-        </>
+        <Container disableGutters={true} maxWidth={false} sx={{ height: '100vh' }}>
+            <Box
+                sx={{
+                    height: (theme) => theme.trello.appBarHeight,
+                    backgroundColor: 'primary.light',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <ModeSelect />
+            </Box>
+            <Box
+                sx={{
+                    height: (theme) => theme.trello.boardBarHeight,
+                    backgroundColor: 'primary.dark',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                Board Bar
+            </Box>
+            <Box
+                sx={{
+                    height: (theme) => `calc(100vh - ${theme.trello.boardBarHeight} - ${theme.trello.appBarHeight})`,
+                    backgroundColor: 'primary.light',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                Content
+            </Box>
+        </Container>
     )
 }
 
