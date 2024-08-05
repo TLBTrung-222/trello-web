@@ -45,6 +45,9 @@ export default function AppBar() {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <TextField id="outlined-search" label="Search..." type="search" size="small" />
                 <ModeSelect />
+
+                {/* Tooltips display informative text when users hover over, focus on, or tap an element.
+                 */}
                 <Tooltip title="Notifications">
                     <IconButton>
                         <Badge badgeContent={4} color="primary">
@@ -52,6 +55,7 @@ export default function AppBar() {
                         </Badge>
                     </IconButton>
                 </Tooltip>
+
                 <Tooltip title="Help">
                     <IconButton>
                         <HelpOutlineIcon />
