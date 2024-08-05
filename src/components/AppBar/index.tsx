@@ -16,6 +16,8 @@ import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profile from './Menus/Profile'
+import Button from '@mui/material/Button'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 export default function AppBar() {
     return (
@@ -39,12 +41,18 @@ export default function AppBar() {
                     <Recent />
                     <Starred />
                     <Templates />
+                    <Button variant="outlined" startIcon={<LibraryAddIcon />}>
+                        Create
+                    </Button>
                 </Box>
             </Box>
 
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <TextField id="outlined-search" label="Search..." type="search" size="small" />
                 <ModeSelect />
+
+                {/* Tooltips display informative text when users hover over, focus on, or tap an element.
+                 */}
                 <Tooltip title="Notifications">
                     <IconButton>
                         <Badge badgeContent={4} color="primary">
@@ -52,6 +60,7 @@ export default function AppBar() {
                         </Badge>
                     </IconButton>
                 </Tooltip>
+
                 <Tooltip title="Help">
                     <IconButton>
                         <HelpOutlineIcon />
