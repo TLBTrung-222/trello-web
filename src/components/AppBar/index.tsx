@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profile from './Menus/Profile'
+import Button from '@mui/material/Button'
 
 export default function AppBar() {
     return (
@@ -39,6 +40,7 @@ export default function AppBar() {
                     <Recent />
                     <Starred />
                     <Templates />
+                    <Button variant="outlined">Create</Button>
                 </Box>
             </Box>
 
