@@ -59,6 +59,7 @@ export default function AppBar() {
                         variant="outlined"
                         startIcon={<LibraryAddIcon />}
                         sx={{
+                            color: 'white',
                             border: 'none',
                             '&:hover': {
                                 border: 'none'

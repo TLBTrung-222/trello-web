@@ -54,7 +54,7 @@ export default function BoardBar() {
                 <Button
                     variant="outlined"
                     startIcon={<PersonAddIcon />}
-                    sx={{ borderColor: 'white', '&:hover': { borderColor: 'white' } }}
+                    sx={{ color: 'white', borderColor: 'white', '&:hover': { borderColor: 'white' } }}
                 >
                     Invite
                 </Button>
@@ -65,16 +65,34 @@ export default function BoardBar() {
                         '& .MuiAvatar-root': {
                             width: '32px',
                             height: '32px',
-                            border: 'none'
+                            border: 'none',
+                            color: 'white',
+                            cursor: 'pointer',
+                            // target the surplus avatar
+                            '&:first-of-type': {
+                                bgcolor: '#a4b0be'
+                            }
                         }
                     }}
                     max={4}
                 >
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                    <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                    <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+                    <Avatar
+                        alt="Remy Sharp"
+                        src="https://picsum.photos/id/1/200/300
+"
+                    />
+                    <Avatar
+                        alt="Travis Howard"
+                        src="https://picsum.photos/id/235/200/300
+"
+                    />
+                    <Avatar
+                        alt="Cindy Baker"
+                        src="https://picsum.photos/id/237/200/300
+"
+                    />
+                    <Avatar alt="Agnes Walker" src="https://picsum.photos/200/300" />
+                    <Avatar alt="Trevor Henderson" src="https://picsum.photos/200/300" />
                 </AvatarGroup>
             </Box>
         </Box>

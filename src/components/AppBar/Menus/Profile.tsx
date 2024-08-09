@@ -33,7 +33,7 @@ export default function Profile() {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar sx={{ width: 32, height: 32 }}>BT</Avatar>
+                    <Avatar alt="BT" src="https://picsum.photos/id/240/200/300" sx={{ width: 32, height: 32 }}></Avatar>
                 </IconButton>
             </Tooltip>
             <Menu
