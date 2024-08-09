@@ -1,4 +1,4 @@
-import { cyan, deepOrange, orange, teal } from '@mui/material/colors'
+// import { cyan, deepOrange, orange, teal } from '@mui/material/colors'
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 
 // Define the 'trello' property in the type 'CssVarsThemeOptions'
@@ -27,24 +27,28 @@ const theme = extendTheme({
         boardBarHeight: '60px'
     },
     colorSchemes: {
-        light: {
-            palette: {
-                primary: teal,
-                secondary: deepOrange
-            }
-        },
-        dark: {
-            palette: {
-                primary: cyan,
-                secondary: orange
-            }
-        }
+        // light: {
+        //     palette: {
+        //         primary: teal,
+        //         secondary: deepOrange
+        //     }
+        // },
+        // dark: {
+        //     palette: {
+        //         primary: cyan,
+        //         secondary: orange
+        //     }
+        // }
     },
     components: {
+        // Theme style overrides: https://mui.com/material-ui/customization/creating-themed-components/
         MuiButton: {
             styleOverrides: {
                 root: {
-                    textTransform: 'none'
+                    textTransform: 'none',
+                    color: 'white',
+                    borderWidth: '0.5px',
+                    '&:hover': { borderWidth: '1px' }
                 }
             }
         },
@@ -59,20 +63,20 @@ const theme = extendTheme({
             styleOverrides: {
                 root: ({ theme }) => {
                     return {
-                        color: theme.palette.primary.main,
                         fontSize: '0.825rem',
-                        '.MuiOutlinedInput-notchedOutline': {
-                            borderColor: theme.palette.primary.light
-                        },
-                        '&:hover': {
-                            '.MuiOutlinedInput-notchedOutline': {
-                                borderColor: theme.palette.primary.main
-                            }
-                        },
+                        // color: theme.palette.primary.main,
+                        // '.MuiOutlinedInput-notchedOutline': {
+                        //     borderColor: theme.palette.primary.light
+                        // },
+                        // '&:hover': {
+                        //     '.MuiOutlinedInput-notchedOutline': {
+                        //         borderColor: theme.palette.primary.main
+                        //     }
+                        // },
                         // inspect on chrome, we will see a fieldset element manipulate style
-                        '& fieldset': {
-                            borderWidth: '1px !important'
-                        }
+                        '& fieldset': { borderWidth: '0.5px !important' },
+                        '&:hover fieldset': { borderWidth: '1px !important' },
+                        '&:focus fieldset': { borderWidth: '1px !important' }
                     }
                 }
             }

@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import Workspaces from './Menus/Workspaces'
 import Recent from './Menus/Recent'
 import Starred from './Menus/Starred'
-import Templates from './Menus/Tempates'
+import Templates from './Menus/Templates'
 import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
@@ -18,8 +18,21 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profile from './Menus/Profile'
 import Button from '@mui/material/Button'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
+import InputAdornment from '@mui/material/InputAdornment'
+import SearchIcon from '@mui/icons-material/Search'
+import React from 'react'
+import ClearIcon from '@mui/icons-material/Clear'
 
 export default function AppBar() {
+    const [searchValue, setSearchValue] = React.useState<string>('')
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSearchValue(e.target.value)
+    }
+    const handleClear = () => {
+        setSearchValue('')
+    }
+
     return (
         <Box
             sx={{
@@ -27,43 +40,84 @@ export default function AppBar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                px: 2
+                px: 2,
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1565c0')
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <AppsIcon sx={{ color: 'primary.main' }} />
+                <AppsIcon sx={{ color: 'white' }} />
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                    <SvgIcon component={TrelloIcon} fontSize="small" inheritViewBox sx={{ color: 'primary.main' }} />
-                    <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main' }}>
+                    <SvgIcon component={TrelloIcon} fontSize="small" inheritViewBox sx={{ color: 'white' }} />
+                    <Typography variant="h6" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'white' }}>
                         Trello
                     </Typography>
                     <Workspaces />
                     <Recent />
                     <Starred />
                     <Templates />
-                    <Button variant="outlined" startIcon={<LibraryAddIcon />}>
+                    <Button
+                        variant="outlined"
+                        startIcon={<LibraryAddIcon />}
+                        sx={{
+                            border: 'none',
+                            '&:hover': {
+                                border: 'none'
+                            }
+                        }}
+                    >
                         Create
                     </Button>
                 </Box>
             </Box>
 
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <TextField id="outlined-search" label="Search..." type="search" size="small" />
+                <TextField
+                    id="outlined-search"
+                    label="Search..."
+                    type="text"
+                    size="small"
+                    value={searchValue}
+                    onChange={handleChange}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <IconButton onClick={handleClear}>
+                                <ClearIcon sx={{ color: searchValue ? 'white' : 'transparent' }} />
+                            </IconButton>
+                        )
+                    }}
+                    sx={{
+                        maxWidth: '170px',
+                        '& label': { color: 'white' },
+                        '& label.Mui-focused': { color: 'white' },
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': { borderColor: 'white' }, // Targets the fieldset element inside the OutlinedInput.
+                            '&:hover fieldset': { borderColor: 'white' }, // Changes the border color when the TextField is hovered.
+                            '&.Mui-focused fieldset': { borderColor: 'white' }, // Changes the border color when the TextField is focused.
+                            '& input': { color: 'white' }, // Ensures the input text color is white.
+                            '& .MuiInputAdornment-root svg': { color: 'white' } // Ensures the icons are white.
+                        }
+                    }}
+                />
                 <ModeSelect />
 
                 {/* Tooltips display informative text when users hover over, focus on, or tap an element.
                  */}
                 <Tooltip title="Notifications">
                     <IconButton>
-                        <Badge badgeContent={4} color="primary">
-                            <NotificationsNoneIcon />
+                        <Badge badgeContent={4} color="warning">
+                            <NotificationsNoneIcon sx={{ color: 'white' }} />
                         </Badge>
                     </IconButton>
                 </Tooltip>
 
                 <Tooltip title="Help">
                     <IconButton>
-                        <HelpOutlineIcon />
+                        <HelpOutlineIcon sx={{ color: 'white' }} />
                     </IconButton>
                 </Tooltip>
                 <Profile />
