@@ -18,8 +18,15 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import { COLUMN_HEADER_HEIGHT, COLUMN_FOOTER_HEIGHT } from '~/utils/constants'
 import ListCards from './ListCards/ListCards'
+import { Column as ColumnType } from '~/types'
+import { mapOrder } from '~/utils/sorts'
 
-export default function Column() {
+interface ColumnProps {
+    column: ColumnType
+}
+
+export default function Column({ column }: ColumnProps) {
+    const orderedCards = mapOrder(column.cards, column.cardOrderIds, '_id')
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
     const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,7 +66,7 @@ export default function Column() {
                         cursor: 'pointer'
                     }}
                 >
-                    Column Title
+                    {column.title}
                 </Typography>
                 <Box>
                     {/* IconButton make it more aesthetic */}
@@ -115,7 +122,7 @@ export default function Column() {
                 </Box>
             </Box>
 
-            <ListCards />
+            <ListCards cards={orderedCards} />
 
             {/* Column card footer */}
             <Box

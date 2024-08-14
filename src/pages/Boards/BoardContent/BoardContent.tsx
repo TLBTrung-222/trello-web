@@ -1,8 +1,14 @@
 import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
-// use fixed-length for header column and footer column height
+import { Board } from '~/types'
+import { mapOrder } from '~/utils/sorts'
 
-export default function BoardContent() {
+interface BoardContentProps {
+    board: Board
+}
+
+export default function BoardContent({ board }: BoardContentProps) {
+    const orderedColumns = mapOrder(board.columns, board.columnOrderIds, '_id')
     return (
         <Box
             sx={{
@@ -11,7 +17,7 @@ export default function BoardContent() {
                 p: '10px 0'
             }}
         >
-            <ListColumns />
+            <ListColumns columns={orderedColumns} />
         </Box>
     )
 }
