@@ -9,6 +9,8 @@ import FilterListIcon from '@mui/icons-material/FilterList'
 import Avatar from '@mui/material/Avatar'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { Board } from '~/types'
+import { capitalizeFirstLetter } from '~/utils/formatter'
 
 const MENU_STYLE = {
     color: 'white',
@@ -24,7 +26,11 @@ const MENU_STYLE = {
     }
 }
 
-export default function BoardBar() {
+type BoardBarProps = {
+    board: Board
+}
+
+export default function BoardBar({ board }: BoardBarProps) {
     return (
         <Box
             sx={{
@@ -39,9 +45,9 @@ export default function BoardBar() {
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Chip icon={<DashBoardIcon />} label="TrungTLB Board" clickable sx={MENU_STYLE} />
+                <Chip icon={<DashBoardIcon />} label={board.title} clickable sx={MENU_STYLE} />
 
-                <Chip icon={<VpnLockIcon />} label="Public/Private Board" clickable sx={MENU_STYLE} />
+                <Chip icon={<VpnLockIcon />} label={capitalizeFirstLetter(board?.type)} clickable sx={MENU_STYLE} />
 
                 <Chip icon={<AddToDriveIcon />} label="Add to Google Drive" clickable sx={MENU_STYLE} />
 

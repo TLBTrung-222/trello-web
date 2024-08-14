@@ -1,8 +1,13 @@
 import Box from '@mui/material/Box'
 import { COLUMN_HEADER_HEIGHT, COLUMN_FOOTER_HEIGHT } from '~/utils/constants'
 import Card from './Card/Card'
+import { Card as CardType } from '~/types'
 
-export default function ListCards() {
+interface ListCardsProps {
+    cards: CardType[]
+}
+
+export default function ListCards({ cards }: ListCardsProps) {
     return (
         <Box
             sx={{
@@ -15,7 +20,6 @@ export default function ListCards() {
                     boxShadow: '0 1px 1px rgba(0,0,0,0.2)'
                 },
                 '& .MuiTypography-root': {
-                    p: 1,
                     fontSize: '0.875rem'
                 },
                 overflowX: 'hidden',
@@ -40,15 +44,9 @@ export default function ListCards() {
                 }
             }}
         >
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card test />
-            <Card test />
-            <Card test />
-            <Card test />
-            <Card test />
+            {cards.map((card) => (
+                <Card card={card} key={card._id} />
+            ))}
         </Box>
     )
 }

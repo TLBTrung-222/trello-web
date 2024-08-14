@@ -6,38 +6,37 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import GroupIcon from '@mui/icons-material/Group'
 import { Attachment, ModeComment } from '@mui/icons-material'
+import { Card as CardType } from '~/types'
 
-type props = {
-    test?: boolean
+type CardProps = {
+    card: CardType
 }
 
-export default function Card({ test }: props) {
-    if (test) {
-        return (
-            <MuiCard sx={{ overflow: 'unset' }}>
-                <CardContent>
-                    <Typography>Card test</Typography>
-                </CardContent>
-            </MuiCard>
-        )
+export default function Card({ card }: CardProps) {
+    const shouldShowCardAction = () => {
+        return !!card.memberIds.length || !!card.comments.length || !!card.attachments.length
     }
+
     return (
         <MuiCard sx={{ overflow: 'unset' }}>
-            <CardMedia sx={{ height: 140 }} image="https://picsum.photos/id/20/200/300" title="green iguana" />
+            {card.cover && <CardMedia sx={{ height: 140 }} image={card.cover} />}
+
             <CardContent>
-                <Typography>Card with media</Typography>
+                <Typography>{card.title}</Typography>
             </CardContent>
-            <CardActions sx={{ p: '0 4px 8px 4px' }}>
-                <Button size="small" startIcon={<GroupIcon />}>
-                    20
-                </Button>
-                <Button size="small" startIcon={<ModeComment />}>
-                    20
-                </Button>
-                <Button size="small" startIcon={<Attachment />}>
-                    20
-                </Button>
-            </CardActions>
+            {shouldShowCardAction() && (
+                <CardActions sx={{ p: '0 4px 8px 4px' }}>
+                    <Button size="small" startIcon={<GroupIcon />}>
+                        {card.memberIds.length}
+                    </Button>
+                    <Button size="small" startIcon={<ModeComment />}>
+                        {card.comments.length}
+                    </Button>
+                    <Button size="small" startIcon={<Attachment />}>
+                        {card.attachments.length}
+                    </Button>
+                </CardActions>
+            )}
         </MuiCard>
     )
 }
