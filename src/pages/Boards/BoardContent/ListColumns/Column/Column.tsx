@@ -20,13 +20,25 @@ import { COLUMN_HEADER_HEIGHT, COLUMN_FOOTER_HEIGHT } from '~/utils/constants'
 import ListCards from './ListCards/ListCards'
 import { Column as ColumnType } from '~/types'
 import { mapOrder } from '~/utils/sorts'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 interface ColumnProps {
     column: ColumnType
 }
 
 export default function Column({ column }: ColumnProps) {
-    const orderedCards = mapOrder(column.cards, column.cardOrderIds, '_id')
+    // For drag and drop between columns
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+        id: column._id,
+        data: { ...column }
+    })
+    const dndKitColumnStyles = {
+        transform: CSS.Translate.toString(transform),
+        transition
+    }
+
+    // For menu items
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
     const open = Boolean(anchorEl)
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,8 +48,16 @@ export default function Column({ column }: ColumnProps) {
     const handleClose = () => {
         setAnchorEl(null)
     }
+
+    // For ordering cards
+    const orderedCards = mapOrder(column.cards, column.cardOrderIds, '_id')
+
     return (
         <Box
+            ref={setNodeRef}
+            style={dndKitColumnStyles}
+            {...attributes}
+            {...listeners}
             sx={{
                 maxWidth: '300px',
                 minWidth: '300px',
